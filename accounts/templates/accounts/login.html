@@ -1,0 +1,19 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+  <!-- Heading for the login page -->
+  <h2>Login</h2>
+  
+  <!-- Form for user login -->
+  <form method="post">
+    <!-- CSRF token for security -->
+    {% csrf_token %}
+    
+    <!-- Render the login form fields as paragraphs -->
+    {{ form.as_p }}
+    
+    <!-- Submit button for the login form -->
+    <input type="submit" name="login" value="Login">
+  </form>
+  
+{% endblock %}

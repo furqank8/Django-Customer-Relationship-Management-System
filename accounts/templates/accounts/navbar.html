@@ -1,0 +1,44 @@
+{% load static %}
+
+<style>
+  /* Styles for the hello-msg class */
+  .hello-msg {
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Logo image -->
+  <img src="{% static 'images/logo.png' %}" alt="Logo">
+  
+  <!-- Toggler button for mobile view -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      {% if request.user.is_staff %}
+        <!-- Links visible to staff users -->
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'products' %}">Products</a>
+        </li>
+      {% else %}
+        <!-- Links visible to non-staff users -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account' %}">Settings</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+
+  <!-- User greeting and logout link -->
+  <span class="hello-msg">Hello {{ request.user.username }}</span>
+  <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+</nav>

@@ -1,0 +1,101 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+<br>
+
+<!-- Row for customer information and actions -->
+<div class="row">
+    <!-- Column for customer details and action buttons -->
+    <div class="col-md">
+        <div class="card card-body">
+            <!-- Customer section heading -->
+            <h5>Customer:</h5>
+            <hr>
+            <!-- Button to update customer details (link placeholder) -->
+            <a class="btn btn-outline-info btn-sm btn-block" href="">Update Customer</a>
+            <!-- Button to place a new order, passing customer ID to the URL -->
+            <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'create_order' customer.id %}">Place new Order</a>
+        </div>
+    </div>
+
+    <!-- Column for displaying contact information -->
+    <div class="col-md">
+        <div class="card card-body">
+            <!-- Contact information section heading -->
+            <h5>Contact Information</h5>
+            <hr>
+            <!-- Display customer email and phone -->
+            <p>Email: {{customer.email}}</p>
+            <p>Phone: {{customer.phone}}</p>
+        </div>
+    </div>
+
+    <!-- Column for displaying total number of orders -->
+    <div class="col-md">
+        <div class="card card-body">
+            <!-- Total orders section heading -->
+            <h5>Total Orders</h5>
+            <hr>
+            <!-- Display the total number of orders -->
+            <h1 style="text-align: center; padding: 10px">{{orders.count}}</h1>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- Row for search/filter form -->
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <!-- Search/filter form -->
+            <form method="get">
+                <!-- Render the filter form -->
+                {{ myFilter.form }}
+                <!-- Search button -->
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+
+<!-- Row for displaying orders in a table -->
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <!-- Orders table -->
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <!-- Table headers -->
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Note</th>
+                        <th>Date Ordered</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate through orders and display each one -->
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.product }}</td>
+                        <td>{{ order.product.category }}</td>
+                        <td>{{ order.note }}</td>
+                        <td>{{ order.date_created }}</td>
+                        <td>{{ order.status }}</td>
+                        <!-- Button to update the order -->
+                        <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+                        <!-- Button to delete the order -->
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

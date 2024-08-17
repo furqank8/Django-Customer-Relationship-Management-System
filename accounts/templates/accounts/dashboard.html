@@ -1,0 +1,81 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<!-- Include status template for notifications or messages -->
+{% include 'accounts/status.html' %}
+
+<br>
+
+<!-- Row for displaying customers and orders -->
+<div class="row">
+    <!-- Column for customer management -->
+    <div class="col-md-5">
+        <h5>CUSTOMERS:</h5>
+        <hr>
+        <div class="card card-body">
+            <!-- Button to create a new customer; link placeholder to be filled -->
+            <a class="btn btn-primary btn-sm btn-block" href="">Create Customer</a>
+            <!-- Table displaying customer details -->
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate through customers and display each one -->
+                    {% for customer in customers %}
+                    <tr>
+                        <!-- Link to view customer details -->
+                        <td><a href="{% url 'customer' customer.id %}">View</a></td>
+                        <!-- Display customer name and phone -->
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.phone }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Column for displaying the last 5 orders -->
+    <div class="col-md-7">
+        <h5>LAST 5 ORDERS</h5>
+        <hr>
+        <div class="card card-body">
+            <!-- Table displaying recent order details -->
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <!-- Table headers for orders -->
+                        <th>Product</th>
+                        <th>Date Ordered</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate through orders and display each one -->
+                    {% for order in orders %}
+                    <tr>
+                        <!-- Display order product, date, and status -->
+                        <td>{{ order.product }}</td>
+                        <td>{{ order.date_created }}</td>
+                        <td>{{ order.status }}</td>
+                        <!-- Button to update the order -->
+                        <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+                        <!-- Button to delete the order -->
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

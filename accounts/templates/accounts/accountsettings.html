@@ -1,0 +1,47 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Styling for the profile picture */
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto; /* Center the image horizontally */
+        border-radius: 50%; /* Make the image circular */
+    }
+</style>
+
+<br>
+<div class="row">
+    <!-- Sidebar for navigation and profile picture -->
+    <div class="col-md-3">
+        <div class="card card-body">
+            <!-- Link to navigate back to the profile page -->
+            <a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Profile</a>
+            <hr>
+            <!-- Section heading for account settings -->
+            <h3 style="text-align: center">Account Settings</h3>
+            <hr>
+            <!-- Display profile picture of the current user -->
+            <img class="profile-pic" src="{{request.user.customer.profile_pic.url}}">
+        </div>
+    </div>
+
+    <!-- Main content area for the form -->
+    <div class="col-md-9">
+        <div class="card card-body">
+            <!-- Form for updating user information -->
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %} <!-- CSRF token for security -->
+                {{form.as_p}} <!-- Render form fields as paragraphs -->
+        
+                <!-- Submit button for the form -->
+                <input class="btn btn-primary" type="submit" name="Update Information">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

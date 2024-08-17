@@ -1,0 +1,19 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Confirmation message asking the user to confirm deletion -->
+<p>Are you sure you want to delete {{ orders.product.name }}?</p>
+
+<!-- Form for confirming the deletion action -->
+<form action="" method="POST">
+    <!-- CSRF token for security -->
+    {% csrf_token %}
+    <!-- Link to cancel the deletion and return to the home page -->
+    <a href="{% url 'home' %}">Cancel</a>
+    <!-- Submit button to confirm deletion -->
+    <input type="submit" name="confirm" value="Confirm">
+</form>
+
+{% endblock %}

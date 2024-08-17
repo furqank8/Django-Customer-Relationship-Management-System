@@ -1,0 +1,25 @@
+{% block content %}
+<form action="" method="POST">
+    <!-- CSRF token for security -->
+    {% csrf_token %}
+
+    <!-- Username field -->
+    {{ form.username.label }}
+    {{ form.username }}
+
+    <!-- Email field -->
+    {{ form.email.label }}
+    {{ form.email }}
+
+    <!-- Password field 1 -->
+    {{ form.password1.label }}
+    {{ form.password1 }}
+
+    <!-- Password field 2 (confirmation) -->
+    {{ form.password2.label }}
+    {{ form.password2 }}
+
+    <!-- Submit button -->
+    <input type="submit" value="Create User">
+</form>
+{% endblock %}

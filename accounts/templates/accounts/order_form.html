@@ -1,0 +1,23 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- Form for handling a formset -->
+  <form action="" method="POST">
+    <!-- CSRF token for security -->
+    {% csrf_token %}
+    
+    <!-- Management form for handling formsets -->
+    {{ formset.management_form }}
+    
+    <!-- Iterate through each form in the formset -->
+    {% for form in formset %}
+      <!-- Render each form -->
+      {{ form }}
+      <hr> <!-- Horizontal rule for separation -->
+    {% endfor %}
+    
+    <!-- Submit button for the formset -->
+    <input type="submit" name="submit" value="Submit">
+  </form>
+{% endblock %}
